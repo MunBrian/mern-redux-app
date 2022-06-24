@@ -1,5 +1,5 @@
 require("dotenv").config();
-const colors = require("colors");
+require("colors");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const express = require("express");
 const app = express();
@@ -9,12 +9,14 @@ const connectDB = require("./config/db");
 connectDB();
 
 //route
-const route = require("./routes/goalRoutes");
+const goalRoute = require("./routes/goalRoutes");
+const userRoute = require("./routes/userRoutes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/v1/goals", route);
+app.use("/api/v1/goals", goalRoute);
+app.use("/api/v1/users", userRoute);
 
 //error handler
 app.use(errorHandler);
