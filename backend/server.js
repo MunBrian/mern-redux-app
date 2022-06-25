@@ -23,6 +23,17 @@ app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`Server started on port ${port}...`);
-});
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () => {
+      console.log(
+        `MongoDb connected: Server is running on port ${port}...`.cyan.underline
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
