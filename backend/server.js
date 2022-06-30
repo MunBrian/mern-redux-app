@@ -4,9 +4,8 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 const express = require("express");
 const app = express();
 
+//connect to db
 const connectDB = require("./config/db");
-
-connectDB();
 
 //route
 const goalRoute = require("./routes/goalRoutes");
