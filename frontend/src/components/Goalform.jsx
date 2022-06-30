@@ -1,17 +1,25 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useState} from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { createGoal } from '../features/goals/goalSlice'
+import { toast } from 'react-toastify'
 
 
 const Goalform = () => {
     const [text, setText] = useState('')
+    const { message } = useSelector(state => state.goal)
 
     const dispatch = useDispatch()
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createGoal({text}))
+        if(text){
+             dispatch(createGoal({text}))
+        }else{
+            toast.error(message)
+        }
+       
+
         setText('')
     }
 
